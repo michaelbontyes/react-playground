@@ -2,15 +2,38 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 class App extends React.Component {
-  render() {
-    let txt = this.props.txt
-    return <h3>{txt}</h3>
+  constructor(){
+    super();
+    this.state = {txt: ''}
+    this.update = this.update.bind(this)
   }
+  update(e){
+    this.setState({txt: e.target.value})
+  }
+  render() {
+    return(
+      <div>
+      <input type="text"
+        onChange={this.update.bind(this)} />
+        <Widget txt={this.state.txt} />
+        <Widget txt={this.state.txt} />
+        <Widget txt={this.state.txt} />
+        </div>
+    );
+  }
+}
+
+const Widget = (props) => {
+  return(
+    <div>
+      <h1>{props.txt}</h1>
+    </div>
+  );
 }
 
 App.propTypes = {
   txt: React.PropTypes.string,
-  cat: React.PropTypes.number.isRequired
+  //cat: React.PropTypes.number.isRequired
 }
 
 App.defaultProps ={
@@ -18,6 +41,6 @@ App.defaultProps ={
 }
 
 ReactDOM.render(
-  <App cat={5} />,
+  <App/>,
   document.getElementById('app')
 );
