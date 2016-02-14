@@ -5,6 +5,7 @@ class App extends React.Component{
   constructor(){
     super();
 <<<<<<< HEAD
+<<<<<<< HEAD
     this.state = {val: 0};
     this.update = this.update.bind(this);
   }
@@ -58,6 +59,27 @@ class Wrapper extends React.Component {
   }
 }
 
+=======
+    this.state = {txt: ''}
+    this.update = this.update.bind(this)
+  }
+  update(e){
+    this.setState({txt: e.target.value})
+  }
+  render() {
+    return(
+      <div>
+      <input type="text"
+        onChange={this.update.bind(this)} />
+        <Widget txt={this.state.txt} />
+        <Widget txt={this.state.txt} />
+        <Widget txt={this.state.txt} />
+        </div>
+    );
+  }
+}
+
+>>>>>>> parent of 01df68a... refs
 const Widget = (props) => {
   return(
 >>>>>>> parent of 01df68a... refs
