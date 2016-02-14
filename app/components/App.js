@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom';
 class App extends React.Component{
   constructor(){
     super();
+<<<<<<< HEAD
     this.state = {val: 0};
     this.update = this.update.bind(this);
   }
@@ -37,6 +38,29 @@ class Wrapper extends React.Component {
   }
   render(){
   return (
+=======
+    this.state = {txt: ''}
+    this.update = this.update.bind(this)
+  }
+  update(e){
+    this.setState({txt: e.target.value})
+  }
+  render() {
+    return(
+      <div>
+      <input type="text"
+        onChange={this.update.bind(this)} />
+        <Widget txt={this.state.txt} />
+        <Widget txt={this.state.txt} />
+        <Widget txt={this.state.txt} />
+        </div>
+    );
+  }
+}
+
+const Widget = (props) => {
+  return(
+>>>>>>> parent of 01df68a... refs
     <div>
       <button onClick={this.mount.bind(this)}>Mount</button>
       <button onClick={this.unmount.bind(this)}>Unmount</button>
