@@ -1,99 +1,92 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-class App extends React.Component{
+class App extends React.Component {
   constructor(){
     super();
-<<<<<<< HEAD
-<<<<<<< HEAD
-    this.state = {val: 0};
-    this.update = this.update.bind(this);
-  }
-  update(){
-    this.setState({val: this.state.val + 1})
-  }
-  componentWillMount(){
-    console.log('mounting')
-  }
-  render(){
-    console.log('rendering!')
-    return <button onClick={this.update}>{this.state.val}</button>
-  }
-  componentDidMount(){
-    console.log('mounted')
-  }
-  componentWillUnmount(){
-    console.log('bye!')
-  }
-}
-
-class Wrapper extends React.Component {
-  constructor(){
-    super();
-  }
-  mount() {
-    ReactDOM.render(<App />, document.getElementById('a'))
-  }
-  unmount(){
-    ReactDOM.unmountComponentAtNode(document.getElementById('a'))
-  }
-  render(){
-  return (
-=======
-    this.state = {txt: ''}
+    this.state = {
+      red: 0
+    }
     this.update = this.update.bind(this)
   }
   update(e){
-    this.setState({txt: e.target.value})
+    this.setState({
+      red: ReactDOM.findDOMNode(this.refs.red.refs.inp).value
+    })
   }
   render() {
     return(
       <div>
-      <input type="text"
-        onChange={this.update.bind(this)} />
-        <Widget txt={this.state.txt} />
-        <Widget txt={this.state.txt} />
-        <Widget txt={this.state.txt} />
-        </div>
+        <NumInput
+        ref="red"
+        min={0}
+        max={255}
+        step={5}
+        val={+this.state.red}
+        type="range"
+        label="Red"
+        update={this.update}/>
+      </div>
     );
   }
 }
 
-=======
-    this.state = {txt: ''}
-    this.update = this.update.bind(this)
-  }
-  update(e){
-    this.setState({txt: e.target.value})
-  }
+class NumInput extends React.Component {
   render() {
+    let label = this.props.label !== '' ?
+      <label>{this.props.label} - {this.props.val} </label> : ''
     return(
       <div>
-      <input type="text"
-        onChange={this.update.bind(this)} />
-        <Widget txt={this.state.txt} />
-        <Widget txt={this.state.txt} />
-        <Widget txt={this.state.txt} />
-        </div>
-    );
-  }
-}
-
->>>>>>> parent of 01df68a... refs
-const Widget = (props) => {
-  return(
->>>>>>> parent of 01df68a... refs
-    <div>
-      <button onClick={this.mount.bind(this)}>Mount</button>
-      <button onClick={this.unmount.bind(this)}>Unmount</button>
-      <div id="a"></div>
-    </div>
+      <input ref="inp"
+        type={this.props.type}
+        min={this.props.min}
+        max={this.props.max}
+        step={this.props.step}
+        defaultValue={this.props.val}
+        onChange={this.props.update} />
+        {label}
+      </div>
     )
   }
 }
 
+NumInput.propTypes = {
+  min: React.PropTypes.number,
+  max: React.PropTypes.number,
+  step: React.PropTypes.number,
+  val: React.PropTypes.number,
+  label: React.PropTypes.string,
+  update: React.PropTypes.func.isRequired,
+  type: React.PropTypes.oneOf(['number', 'range'])
+}
+
+NumInput.defaultProps = {
+  min: 0,
+  max: 0,
+  step: 1,
+  val: 0,
+  label: '',
+  type: 'range'
+}
+
+const Widget = (props) => {
+  return(
+    <div>
+      <h1>{props.txt}</h1>
+    </div>
+  );
+}
+
+App.propTypes = {
+  txt: React.PropTypes.string,
+  //cat: React.PropTypes.number.isRequired
+}
+
+App.defaultProps ={
+  txt: 'this is the default txt yo'
+}
 
 ReactDOM.render(
-  <Wrapper/>,
+  <App/>,
   document.getElementById('app')
 );
